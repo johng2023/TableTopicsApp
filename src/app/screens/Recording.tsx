@@ -127,7 +127,7 @@ const videoBlob = new Blob(videoChunksRef.current, { type: mimeType });
         navigate('/history', { state: { celebrate: true, durationSeconds } });
       };
 
-      mediaRecorder.start();
+      mediaRecorder.start(1000);
       setIsRecording(true);
       setIsReady(true);
 
