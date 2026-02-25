@@ -89,29 +89,33 @@ export async function analyzeRecording(
   recording_id: string,
   onStatusChange?: (status: string) => void
 ): Promise<Analysis | null> {
-  await startAnalysis(recording_id)
+  const started = await startAnalysis(recording_id)
+  if (!started) return null
   onStatusChange?.('processing')
 
   return new Promise((resolve) => {
-    const interval = setInterval(async () => {
+    let interval: ReturnType<typeof setInterval>
+
+    const timeout = setTimeout(() => {
+      clearInterval(interval)
+      resolve(null)
+    }, 180_000)
+
+    interval = setInterval(async () => {
       const result = await pollAnalysis(recording_id)
 
       if (result.status === 'complete') {
+        clearTimeout(timeout)
         clearInterval(interval)
         resolve(result.data)
       } else if (result.status === 'error') {
+        clearTimeout(timeout)
         clearInterval(interval)
         resolve(null)
       } else {
         onStatusChange?.(result.status)
       }
     }, 5000)
-
-    // Safety timeout: stop polling after 3 minutes
-    setTimeout(() => {
-      clearInterval(interval)
-      resolve(null)
-    }, 180_000)
   })
 }
 
