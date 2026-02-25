@@ -7,6 +7,7 @@ import { getRecordings, type Recording } from "../utils/recordings";
 import type { Analysis } from "../utils/analysis";
 
 function ScoreBar({ label, score, explanation }: { label: string; score: number; explanation?: string }) {
+  if (score == null || isNaN(score)) return null;
   const pct = Math.round((score / 10) * 100);
   const color = score >= 8 ? '#22c55e' : score >= 6 ? '#C9A84C' : '#ef4444';
   return (
@@ -29,6 +30,7 @@ function ScoreBar({ label, score, explanation }: { label: string; score: number;
 }
 
 function ScoreRing({ score, label }: { score: number; label: string }) {
+  if (score == null || isNaN(score)) return null;
   const color = score >= 8 ? '#22c55e' : score >= 6 ? '#C9A84C' : '#ef4444';
   return (
     <div className="flex flex-col items-center justify-center bg-white rounded-2xl shadow-lg p-6 border border-[#EEE9DF]">
@@ -64,21 +66,27 @@ export function Dashboard() {
 
   const loadData = async () => {
     setLoading(true);
+    try {
+      const [recordings, { data: analysisData }] = await Promise.all([
+        getRecordings(),
+        supabase
+          .from('analyses')
+          .select('*')
+          .eq('recording_id', recordingId)
+          .eq('status', 'complete')
+          .maybeSingle(),
+      ]);
 
-    const [recordings, { data: analysisData }] = await Promise.all([
-      getRecordings(),
-      supabase
-        .from('analyses')
-        .select('*')
-        .eq('recording_id', recordingId)
-        .eq('status', 'complete')
-        .maybeSingle(),
-    ]);
-
-    const rec = recordings.find(r => r.id === recordingId);
-    setRecording(rec || null);
-    setAnalysis(analysisData as Analysis | null);
-    setLoading(false);
+      const rec = recordings.find(r => r.id === recordingId);
+      setRecording(rec || null);
+      setAnalysis(analysisData as Analysis | null);
+    } catch (err) {
+      console.error('Failed to load dashboard data:', err);
+      setRecording(null);
+      setAnalysis(null);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
