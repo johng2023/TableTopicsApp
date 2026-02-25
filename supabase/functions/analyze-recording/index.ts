@@ -73,7 +73,7 @@ Deno.serve(async (req) => {
         audio_url: recording.video_url,
         sentiment_analysis: true,
         filter_profanity: false,
-        speech_threshold: 0.2,
+        speech_models: ['universal-2'],
       }),
     })
 
