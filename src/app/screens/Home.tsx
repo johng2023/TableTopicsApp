@@ -40,6 +40,15 @@ export function Home() {
 
       {/* Main Content */}
       <main className="mx-auto flex-1 flex flex-col justify-center items-center px-6 pb-12">
+        <div className="text-center mb-10">
+  <h2 className="text-3xl font-bold text-[#F9FAFB] mb-3 leading-tight">
+    Practice speaking.<br />Get better every day.
+  </h2>
+  <p className="text-[#9CA3AF] text-base max-w-xs mx-auto leading-relaxed">
+    Answer a random Table Topics prompt, record your response, and get 
+    AI-powered Toastmasters feedback in seconds.
+  </p>
+</div>
         {/* Prompt Card */}
         <div className="w-full bg-[#1F2937] rounded-2xl p-6 mb-5 border border-white/10">
           <p className="text-xs uppercase tracking-widest text-[#3B82F6] font-semibold mb-3">
