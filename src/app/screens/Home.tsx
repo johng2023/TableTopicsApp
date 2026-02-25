@@ -52,6 +52,7 @@ export function Home() {
 
         {/* New Topic Link */}
         <button
+          type="button"
           onClick={handleNewPrompt}
           className="flex items-center gap-1.5 text-sm text-[#9CA3AF] hover:text-[#F9FAFB] mb-8 self-center transition-colors"
         >
