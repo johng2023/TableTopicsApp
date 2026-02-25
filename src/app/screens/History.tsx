@@ -152,7 +152,7 @@ export function History() {
             <p className="text-[#9CA3AF] text-center mb-6">
               No recordings yet. Start practicing to see your recordings here!
             </p>
-            <Button onClick={() => navigate("/")} className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white">
+            <Button onClick={() => navigate("/")} className="w-1/3 bg-[#3B82F6] hover:bg-[#2563EB] text-white">
               Start Your Rep
             </Button>
           </div>
