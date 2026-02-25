@@ -155,7 +155,7 @@ export function Dashboard() {
         {analysis.summary && (
           <div className="bg-[#1F2937] rounded-xl p-4 border border-white/10">
             <p className="text-xs uppercase tracking-wide text-[#3B82F6] font-semibold mb-2">Assessment</p>
-            <p className="text-sm leading-relaxed">{analysis.summary}</p>
+            <p className="text-sm text-[#F9FAFB] leading-relaxed">{analysis.summary}</p>
           </div>
         )}
 
