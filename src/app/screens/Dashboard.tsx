@@ -9,21 +9,21 @@ import type { Analysis } from "../utils/analysis";
 function ScoreBar({ label, score, explanation }: { label: string; score: number; explanation?: string }) {
   if (score == null || isNaN(score)) return null;
   const pct = Math.round((score / 10) * 100);
-  const color = score >= 8 ? '#22c55e' : score >= 6 ? '#C9A84C' : '#ef4444';
+  const color = score >= 8 ? '#22c55e' : score >= 6 ? '#F59E0B' : '#ef4444';
   return (
     <div className="mb-3">
       <div className="flex justify-between items-center mb-1">
-        <span className="text-sm font-medium text-[#1B2A4A]">{label}</span>
+        <span className="text-sm font-medium text-[#F9FAFB]">{label}</span>
         <span className="text-sm font-bold" style={{ color }}>{score}/10</span>
       </div>
-      <div className="h-2 bg-[#EEE9DF] rounded-full overflow-hidden">
+      <div className="h-2 bg-[#374151] rounded-full overflow-hidden">
         <div
           className="h-full rounded-full transition-all duration-700"
           style={{ width: `${pct}%`, backgroundColor: color }}
         />
       </div>
       {explanation && (
-        <p className="text-xs text-gray-500 mt-0.5">{explanation}</p>
+        <p className="text-xs text-[#9CA3AF] mt-0.5">{explanation}</p>
       )}
     </div>
   );
@@ -31,13 +31,13 @@ function ScoreBar({ label, score, explanation }: { label: string; score: number;
 
 function ScoreRing({ score, label }: { score: number; label: string }) {
   if (score == null || isNaN(score)) return null;
-  const color = score >= 8 ? '#22c55e' : score >= 6 ? '#C9A84C' : '#ef4444';
+  const color = score >= 8 ? '#22c55e' : score >= 6 ? '#F59E0B' : '#ef4444';
   return (
-    <div className="flex flex-col items-center justify-center bg-white rounded-2xl shadow-lg p-6 border border-[#EEE9DF]">
+    <div className="flex flex-col items-center justify-center bg-[#1F2937] rounded-2xl p-6 border border-white/10">
       <div className="text-5xl font-black mb-1" style={{ color }}>
         {score.toFixed(1)}
       </div>
-      <div className="text-sm text-gray-400 mb-2">out of 10</div>
+      <div className="text-sm text-[#9CA3AF] mb-2">out of 10</div>
       <div
         className="text-base font-bold px-3 py-1 rounded-full text-white"
         style={{ backgroundColor: color }}
@@ -91,23 +91,23 @@ export function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#FAF8F4] flex items-center justify-center">
-        <div className="text-center text-gray-500">Loading analysis...</div>
+      <div className="min-h-screen bg-[#111827] flex items-center justify-center">
+        <div className="text-center text-[#9CA3AF]">Loading analysis...</div>
       </div>
     );
   }
 
   if (!analysis || !recording) {
     return (
-      <div className="min-h-screen bg-[#FAF8F4] flex flex-col">
-        <header className="p-4 flex items-center gap-3 bg-white border-b border-[#EEE9DF]">
+      <div className="min-h-screen bg-[#111827] flex flex-col">
+        <header className="p-4 flex items-center gap-3 bg-[#111827] border-b border-white/10">
           <Button variant="ghost" size="icon" onClick={() => navigate('/history')}>
-            <ArrowLeft className="size-5 text-[#1B2A4A]" />
+            <ArrowLeft className="size-5 text-[#9CA3AF]" />
           </Button>
-          <h1 className="font-bold text-xl text-[#1B2A4A]">Analysis</h1>
+          <h1 className="font-bold text-xl text-[#F9FAFB]">Analysis</h1>
         </header>
         <main className="flex-1 flex items-center justify-center px-6">
-          <p className="text-gray-500 text-center">No analysis found for this recording.</p>
+          <p className="text-[#9CA3AF] text-center">No analysis found for this recording.</p>
         </main>
       </div>
     );
@@ -118,15 +118,15 @@ export function Dashboard() {
   const fillers = analysis.filler_word_breakdown || [];
 
   return (
-    <div className="min-h-screen bg-[#FAF8F4]">
+    <div className="min-h-screen bg-[#111827]">
       {/* Header */}
-      <header className="p-4 flex items-center gap-3 sticky top-0 bg-white/90 backdrop-blur-sm border-b border-[#EEE9DF] z-10">
+      <header className="p-4 flex items-center gap-3 sticky top-0 bg-[#111827] border-b border-white/10 z-10">
         <Button variant="ghost" size="icon" onClick={() => navigate('/history')}>
-          <ArrowLeft className="size-5 text-[#1B2A4A]" />
+          <ArrowLeft className="size-5 text-[#9CA3AF]" />
         </Button>
         <div className="flex items-center gap-2">
-          <Mic className="size-4 text-[#C9A84C]" />
-          <h1 className="font-bold text-xl text-[#1B2A4A]">SpeakDaily</h1>
+          <Mic className="size-4 text-[#3B82F6]" />
+          <h1 className="font-bold text-xl text-[#F9FAFB]">SpeakDaily</h1>
         </div>
       </header>
 
@@ -141,9 +141,9 @@ export function Dashboard() {
         </div>
 
         {/* Prompt */}
-        <div className="bg-white rounded-xl p-4 border border-[#EEE9DF] shadow-sm">
-          <p className="text-xs uppercase tracking-wide text-[#C9A84C] font-semibold mb-1">Topic</p>
-          <p className="text-sm text-[#1B2A4A] leading-relaxed">{recording.prompt}</p>
+        <div className="bg-[#1F2937] rounded-xl p-4 border border-white/10">
+          <p className="text-xs uppercase tracking-wide text-[#3B82F6] font-semibold mb-1">Topic</p>
+          <p className="text-sm text-[#F9FAFB] leading-relaxed">{recording.prompt}</p>
         </div>
 
         {/* Overall Score */}
@@ -153,16 +153,16 @@ export function Dashboard() {
 
         {/* Summary */}
         {analysis.summary && (
-          <div className="bg-[#1B2A4A] rounded-xl p-4 text-white shadow-md">
-            <p className="text-xs uppercase tracking-wide text-[#C9A84C] font-semibold mb-2">Assessment</p>
+          <div className="bg-[#1F2937] rounded-xl p-4 border border-white/10">
+            <p className="text-xs uppercase tracking-wide text-[#3B82F6] font-semibold mb-2">Assessment</p>
             <p className="text-sm leading-relaxed">{analysis.summary}</p>
           </div>
         )}
 
         {/* Score Breakdown */}
         {scores && (
-          <div className="bg-white rounded-xl p-4 border border-[#EEE9DF] shadow-sm">
-            <p className="text-xs uppercase tracking-wide text-[#C9A84C] font-semibold mb-4">Breakdown</p>
+          <div className="bg-[#1F2937] rounded-xl p-4 border border-white/10">
+            <p className="text-xs uppercase tracking-wide text-[#3B82F6] font-semibold mb-4">Breakdown</p>
             <ScoreBar label="Vocal Variety" score={scores.vocal_variety} explanation={scoreExplanations?.vocal_variety} />
             <ScoreBar label="Tonality" score={scores.tonality} explanation={scoreExplanations?.tonality} />
             <ScoreBar label="Word Choice" score={scores.word_choice} explanation={scoreExplanations?.word_choice} />
@@ -172,10 +172,10 @@ export function Dashboard() {
 
         {/* Filler Words */}
         {fillers.length > 0 && (
-          <div className="bg-white rounded-xl p-4 border border-[#EEE9DF] shadow-sm">
+          <div className="bg-[#1F2937] rounded-xl p-4 border border-white/10">
             <div className="flex items-center justify-between mb-3">
-              <p className="text-xs uppercase tracking-wide text-[#C9A84C] font-semibold">Filler Words</p>
-              <span className="text-xs bg-[#EEE9DF] text-[#1B2A4A] px-2 py-0.5 rounded-full font-bold">
+              <p className="text-xs uppercase tracking-wide text-[#3B82F6] font-semibold">Filler Words</p>
+              <span className="text-xs bg-[#374151] text-[#F9FAFB] px-2 py-0.5 rounded-full font-bold">
                 {analysis.filler_word_total ?? 0} total
               </span>
             </div>
@@ -183,10 +183,10 @@ export function Dashboard() {
               {fillers.map(({ word, count }) => (
                 <div
                   key={word}
-                  className="flex items-center gap-1 bg-[#FAF8F4] border border-[#EEE9DF] rounded-full px-3 py-1 text-sm"
+                  className="flex items-center gap-1 bg-[#374151] border border-white/10 rounded-full px-3 py-1 text-sm"
                 >
-                  <span className="font-medium text-[#1B2A4A]">"{word}"</span>
-                  <span className="text-gray-500">× {count}</span>
+                  <span className="font-medium text-[#F9FAFB]">"{word}"</span>
+                  <span className="text-[#9CA3AF]">× {count}</span>
                 </div>
               ))}
             </div>
@@ -195,12 +195,12 @@ export function Dashboard() {
 
         {/* Feedback Points */}
         {analysis.feedback_points && analysis.feedback_points.length > 0 && (
-          <div className="bg-white rounded-xl p-4 border border-[#EEE9DF] shadow-sm">
-            <p className="text-xs uppercase tracking-wide text-[#C9A84C] font-semibold mb-3">Coaching Tips</p>
+          <div className="bg-[#1F2937] rounded-xl p-4 border border-white/10">
+            <p className="text-xs uppercase tracking-wide text-[#3B82F6] font-semibold mb-3">Coaching Tips</p>
             <ul className="space-y-2">
               {analysis.feedback_points.map((tip, i) => (
-                <li key={i} className="flex gap-2 text-sm text-[#1B2A4A]">
-                  <span className="text-[#C9A84C] font-bold mt-0.5">•</span>
+                <li key={i} className="flex gap-2 text-sm text-[#F9FAFB]">
+                  <span className="text-[#3B82F6] font-bold mt-0.5">•</span>
                   <span>{tip}</span>
                 </li>
               ))}
@@ -210,19 +210,19 @@ export function Dashboard() {
 
         {/* Transcription */}
         {analysis.transcript && (
-          <div className="bg-white rounded-xl border border-[#EEE9DF] shadow-sm overflow-hidden">
+          <div className="bg-[#1F2937] rounded-xl border border-white/10 overflow-hidden">
             <button
               className="w-full p-4 flex items-center justify-between text-left"
               onClick={() => setTranscriptExpanded(e => !e)}
             >
-              <p className="text-xs uppercase tracking-wide text-[#C9A84C] font-semibold">Transcription</p>
+              <p className="text-xs uppercase tracking-wide text-[#3B82F6] font-semibold">Transcription</p>
               {transcriptExpanded
-                ? <ChevronUp className="size-4 text-gray-400" />
-                : <ChevronDown className="size-4 text-gray-400" />}
+                ? <ChevronUp className="size-4 text-[#9CA3AF]" />
+                : <ChevronDown className="size-4 text-[#9CA3AF]" />}
             </button>
             {transcriptExpanded && (
               <div className="px-4 pb-4">
-                <p className="text-sm text-gray-700 leading-relaxed">{analysis.transcript}</p>
+                <p className="text-sm text-[#9CA3AF] leading-relaxed">{analysis.transcript}</p>
               </div>
             )}
           </div>
