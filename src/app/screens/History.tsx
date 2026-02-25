@@ -19,11 +19,11 @@ export function History() {
     const celebrate = (location.state as any)?.celebrate;
     if (celebrate) {
       const durationSeconds = (location.state as any)?.durationSeconds;
-      toast.success("Congrats on practicing today!", {
+      toast.success("Great rep. Keep climbing.", {
         description:
           typeof durationSeconds === "number"
-            ? `You just finished a ${formatTime(durationSeconds)} practice rep. Keep it up.`
-            : "You just finished a practice rep. Keep it up.",
+            ? `You just finished a ${formatTime(durationSeconds)} rep. Keep climbing.`
+            : "You just finished a rep. Keep climbing.",
         duration: 5000,
       });
 
@@ -90,18 +90,18 @@ export function History() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF8F4] to-white">
       {/* Header */}
-      <header className="p-4 flex items-center gap-3 sticky top-0 bg-white/90 backdrop-blur-sm border-b border-gray-200 z-10">
+      <header className="p-4 flex items-center gap-3 sticky top-0 bg-white/90 backdrop-blur-sm border-b border-[#EEE9DF] z-10">
         <Button
           variant="ghost"
           size="icon"
           onClick={() => navigate("/")}
-          className="text-blue-700"
+          className="text-[#1B2A4A]"
         >
           <ArrowLeft className="size-5" />
         </Button>
-        <h1 className="font-bold text-xl text-blue-900">My Recordings</h1>
+        <h1 className="font-bold text-xl text-[#1B2A4A]">My Reps</h1>
       </header>
 
       {/* Main Content */}
@@ -114,8 +114,8 @@ export function History() {
             <p className="text-gray-500 text-center mb-6">
               No recordings yet. Start practicing to see your recordings here!
             </p>
-            <Button onClick={() => navigate("/")} className="bg-blue-600 hover:bg-blue-700">
-              Start Practicing
+            <Button onClick={() => navigate("/")} className="bg-[#1B2A4A] hover:bg-[#243660]">
+              Start Your Rep
             </Button>
           </div>
         ) : (
@@ -124,7 +124,7 @@ export function History() {
               <div
                 key={recording.id}
                 onClick={() => handlePlayRecording(recording)}
-                className="bg-white rounded-xl shadow-sm p-4 border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+                className="bg-white rounded-xl shadow-sm p-4 border border-[#EEE9DF] cursor-pointer hover:shadow-md transition-shadow"
               >
                 <div className="flex gap-3">
                   {/* Thumbnail/Play Button */}
@@ -141,7 +141,7 @@ export function History() {
                         </div>
                       </>
                     ) : (
-                      <Play className="size-8 text-blue-600" />
+                      <Play className="size-8 text-[#C9A84C]" />
                     )}
                   </div>
 

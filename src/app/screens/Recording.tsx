@@ -217,7 +217,7 @@ const videoBlob = new Blob(videoChunksRef.current, { type: mimeType });
             <div className="space-y-3">
               <Button 
                 onClick={handleTryAgain}
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-[#1B2A4A] hover:bg-[#243660]"
               >
                 Try Again
               </Button>
@@ -236,7 +236,7 @@ const videoBlob = new Blob(videoChunksRef.current, { type: mimeType });
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF8F4] to-white flex flex-col">
       {/* Header */}
       <header className="p-4 flex items-center justify-between">
         {!isRecording && (
@@ -244,13 +244,13 @@ const videoBlob = new Blob(videoChunksRef.current, { type: mimeType });
             variant="ghost"
             size="icon"
             onClick={() => navigate("/")}
-            className="text-blue-700"
+            className="text-[#1B2A4A]"
           >
             <ArrowLeft className="size-5" />
           </Button>
         )}
         {isRecording && <div className="size-10" />}
-        <h1 className="font-bold text-xl text-blue-900 flex-1 text-center">
+        <h1 className="font-bold text-xl text-[#1B2A4A] flex-1 text-center">
           {isReady ? "Recording" : "Ready to Record"}
         </h1>
         <div className="size-10" />
@@ -267,15 +267,15 @@ const videoBlob = new Blob(videoChunksRef.current, { type: mimeType });
           {!isReady ? (
             /* Start Recording View */
             <div className="text-center">
-              <div className="inline-flex items-center justify-center size-32 bg-blue-100 rounded-full mb-6">
-                <Video className="size-16 text-blue-600" />
+              <div className="inline-flex items-center justify-center size-32 bg-[#EEE9DF] rounded-full mb-6">
+                <Video className="size-16 text-[#C9A84C]" />
               </div>
               <p className="text-gray-600 mb-8">
                 Click the button below to start recording your video response
               </p>
               <Button
                 onClick={startRecording}
-                className="w-full h-14 text-lg bg-blue-600 hover:bg-blue-700 rounded-xl"
+                className="w-full h-14 text-lg bg-[#1B2A4A] hover:bg-[#243660] rounded-xl"
               >
                 <Video className="size-5 mr-2" />
                 Start Recording
