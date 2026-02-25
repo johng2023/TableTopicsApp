@@ -66,7 +66,7 @@ export async function saveRecording(recording: Omit<Recording, 'videoUrl' | 'thu
 
   if (uploadError) {
     console.error('Video upload failed:', uploadError);
-    return;
+    throw new Error(uploadError.message || 'Video upload failed');
   }
 
   const { data: videoData } = supabase.storage.from('recordings').getPublicUrl(videoPath);
